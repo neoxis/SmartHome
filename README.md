@@ -1,7 +1,9 @@
 # SmartHome
 ## Installation And Updating
 ### Installation
+Section coming soon.
 ### Updating
+Section coming soon.
 ## Dashboard
 ### "The Grid"
 ### Create Tile
@@ -10,4 +12,9 @@
 #### Order
 #### On Click
 #### Widget
-### Edit Tile
+### Editing Tiles
+#### Edit
+#### Recoloring
+#### Reordering
+#### Resizing
+#### Deleting
