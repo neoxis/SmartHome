@@ -9,7 +9,7 @@
 			global $conn;
 			$result = $conn->query($sql);
 			
-			echo '<link rel="shortcut icon" href="#" />
+			$html = '<link rel="shortcut icon" href="#" />
 						<link href="/css/smarthome.css" rel="stylesheet"></link>
 						<script type="text/javascript" src="/js/smarthome.js"></script>
 						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,11 +26,16 @@
 							</div>
 							<div class="grid">'; //return false to kill right click default action
 			while($row = $result->fetch_assoc()) {
-				echo '<div id="'. $row['tile_id'] . '" class="' . $row['tile_class'] . '" onclick="' . $row['tile_onclick'] . '" oncontextmenu="editMenu(event,' . $row['id'] . ');return false;">';
-				echo $row['tile_body'];
-				echo '</div>';
+				$html .= '<div id="'. $row['tile_id'] . '" class="' . $row['tile_class'];
+				if($row['tile_id'] == '' && $row['tile_onclick'] == '') {
+					$html .= ' empty-tile';
+				}
+				$html .= '" onclick="' . $row['tile_onclick'] . '" oncontextmenu="editMenu(event,' . $row['id'] . ');">';
+				$html .= $row['tile_body'];
+				$html .= '</div>';
 			}
-			echo '</div>';
+			$html .= '</div>';
+			echo $html;
 		}
 	}
 ?>

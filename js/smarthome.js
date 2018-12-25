@@ -63,14 +63,58 @@ function getInternalTemp(tile_ids) {
 function editMenu(e, id) {
 	e.preventDefault();
 	html =  '<ul class="menu-options">';
-	html += '<li onclick="editTile(' + id + ')">Edit</li>';
-	html += '<li onclick="deleteTile(' + id + ')">Delete</li>';
+	//advanced edit
+	html += '<li onclick="editTile(' + id + ')">Edit</li><hr>';
+	//quick edit
+	html += '<li id="edit-color" onclick="getTileColorChoices(event,' + id + ')">Recolor</li>';
+	html += '<li id="edit-order" onclick="alert(\'To be implemented\')">Reorder</li>';
+	html += '<li id="edit-size" onclick="getTileSizeChoices(event,' + id + ')">Resize</li>';
+	//delete
+	html += '<hr><li onclick="deleteTile(' + id + ')">Delete</li>';
 	html += '</ul>';
 	$('.edit-menu').empty();
 	$('.edit-menu').append(html);
 	$('.edit-menu').css('left', e.pageX);
 	$('.edit-menu').css('top', e.pageY);
 	$('.edit-menu').fadeIn(200, closeOutMenu());
+}
+function getTileSizeChoices(e, id) {
+	e.stopPropagation();
+	sizes = ['small','medium','large'];
+	colors = ['red','blue','green'];
+	html =  '';
+	for(i = 0; i < sizes.length; i++) {
+		html += '<div class="size-choice-' + sizes[i] + ' ' + colors[i] + '" onclick="changeTileSize(' + id + ',\'' + sizes[i] + '\')"></div>';
+	}
+	$('li#edit-size').html(html);
+	$('li#edit-size').prop("onclick", null).off("click");
+}
+function changeTileSize(id, size) {
+	//alert(size);
+	$.getJSON('/php/database_queries/tile_queries.php', {'function':'changeTileSize', 'id':id, 'size':size}, function(e) {
+		if(e.result) {
+			location.reload();
+		}
+	});
+}
+
+function getTileColorChoices(e, id) {
+	e.stopPropagation();
+	colors = ['red','blue','green','yellow'];
+	html = '';
+	for(i = 0; i < colors.length; i++) {
+		html += '<div class="color-choice ' + colors[i] + '" onclick="changeTileColor(' + id + ',\'' + colors[i] + '\')"></div>';
+	}
+	$('li#edit-color').html(html);
+	$('li#edit-color').prop("onclick", null).off("click");
+}
+
+function changeTileColor(id, color) {
+	$.getJSON('/php/database_queries/tile_queries.php', {'function':'changeTileColor', 'id':id, 'color':color}, function(e) {
+		if(e.result) {
+			location.reload();
+		}
+	});
 }
 
 function closeOutMenu() {

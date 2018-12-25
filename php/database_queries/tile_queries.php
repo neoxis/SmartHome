@@ -76,7 +76,50 @@
 				$tile_body . "'," .
 				$tile_order . ")";
 			$result = $conn->query($sql);
-			echo json_encode(array("result" => $result, 'sql' => $sql));
+			echo json_encode(array("result" => $result));
+		}
+	}
+	
+	function changeTileColor() {
+		$id = $_GET['id'];
+		$color = $_GET['color'];
+		if (init() == true) {
+			global $conn;
+			$sql = "SELECT `tile_class` FROM `tiles` WHERE `id`=" . $id;
+			$result = $conn->query($sql);
+			$tile_class = $result->fetch_assoc()['tile_class'];
+			$tile_color = explode(' ', $tile_class);
+			$tile_color = $tile_color[count($tile_color) -1];
+			
+			$sql = "UPDATE tiles SET `tile_class` = '" . str_replace($tile_color,$color,$tile_class) . "' WHERE `id`=" . $id;
+			$result = $conn->query($sql);
+			echo json_encode(array("result" => $result));
+		}
+	}
+	
+	function changeTileSize() {
+		$id = $_GET['id'];
+		$size = $_GET['size'];
+		if (init() == true) {
+			global $conn;
+			$sql = "SELECT `tile_class` FROM `tiles` WHERE `id`=" . $id;
+			$result = $conn->query($sql);
+			$tile_class = $result->fetch_assoc()['tile_class'];
+			$tile_color = explode(' ', $tile_class);
+			$tile_color = $tile_color[count($tile_color) -1];
+			
+			if($size == 'small') {
+				$size = 'tile';
+			}
+			else if($size == 'medium') {
+				$size = 'tile tileM';
+			}
+			else {
+				$size = 'tile tileL';
+			}
+			$sql = "UPDATE tiles SET `tile_class` = '" . $size . " " . $tile_color . "' WHERE `id`=" . $id;
+			$result = $conn->query($sql);
+			echo json_encode(array("result" => $result));
 		}
 	}
 	

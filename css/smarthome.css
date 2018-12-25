@@ -131,6 +131,7 @@ li.dropdown {
 	border: 1px solid #888;
 	width: 150px;
 	background: #333333;
+	z-index: 1;
 }
 .menu-options li {
 	padding: 3px;
@@ -170,9 +171,41 @@ li.dropdown {
     font-size: 20pt;
 }
  
-.tileM { width:210px; }
+.tileM { width:209px; }
 
-.tileL { width: 420px; }
+.tileL { width: 318px; }
+
+.empty-tile { 
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	z-index: 0;
+}
+
+.color-choice {
+	height: 20px;
+	width: 20px;
+	margin-right: 5px;
+	border: 1px solid #333;
+	display: inline-block;
+}
+
+.size-choice-small {
+	height: 20px;
+	width: 20px;
+	border: 1px solid #333;
+}
+
+.size-choice-medium {
+	height: 20px;
+	width: 40px;
+	border: 1px solid #333;
+}
+
+.size-choice-large {
+	height: 20px;
+	width: 60px;
+	border: 1px solid #333;
+}
 
 .yellow { background:#DAA520; }
  
