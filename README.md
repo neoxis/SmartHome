@@ -1,4 +1,7 @@
 # SmartHome
+## Installation And Updating
+### Installation
+### Updating
 ## Dashboard
 ### "The Grid"
 ### Create Tile
