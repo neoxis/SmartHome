@@ -51,6 +51,16 @@
 		}
 	}
 	
+	function getTileCount() {
+		if(init() == true) {
+			global $conn;
+			$sql = "SELECT COUNT(id) AS count FROM tiles";
+			$result = $conn->query($sql);
+			$tile_count = $result->fetch_assoc()['count'];
+			echo json_encode(array("tile_count" => $tile_count));
+		}
+	}
+	
 	function createTile() {
 		$tile_id = $_GET['tile_id'];
 		$tile_class = $_GET['tile_class'];

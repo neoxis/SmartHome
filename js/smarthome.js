@@ -60,14 +60,14 @@ function getInternalTemp(tile_ids) {
 	});
 }
 
-function editMenu(e, id) {
+function editMenu(e, id, order) {
 	e.preventDefault();
 	html =  '<ul class="menu-options">';
 	//advanced edit
 	html += '<li onclick="editTile(' + id + ')">Edit</li><hr>';
 	//quick edit
 	html += '<li id="edit-color" onclick="getTileColorChoices(event,' + id + ')">Recolor</li>';
-	html += '<li id="edit-order" onclick="alert(\'To be implemented\')">Reorder</li>';
+	html += '<li id="edit-order" onclick="getTileOrderChoices(event,' + order + ')">Reorder</li>';
 	html += '<li id="edit-size" onclick="getTileSizeChoices(event,' + id + ')">Resize</li>';
 	//delete
 	html += '<hr><li onclick="deleteTile(' + id + ')">Delete</li>';
@@ -78,6 +78,44 @@ function editMenu(e, id) {
 	$('.edit-menu').css('top', e.pageY);
 	$('.edit-menu').fadeIn(200, closeOutMenu());
 }
+function getTileOrderChoices(e, order) {
+	e.stopPropagation();
+	$.getJSON('/php/database_queries/tile_queries.php', {'function':'getTileCount'}, function(e) {
+		//alert(e.tile_count);
+		html =  '<table class="edit-order-choices"><tr width="100%">';
+		html += '<td><i onclick="set_order_value(event,\'1\')" class="fa fa-angle-double-left" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'--\')" class="fa fa-angle-left" style="font-size:24px"></i></td>';
+		html += '<td width="30%" align="center"><p id="order-value">' + order + '</p></td>';
+		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '++\')"class="fa fa-angle-right" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '\')" class="fa fa-angle-double-right" style="font-size:24px"></i></td>';
+		html += '<td align="right"><i class="fa fa-check-square-o" style="font-size:24px"></i></td>';
+		html += '</tr></table>';
+		$('li#edit-order').html(html);
+		$('li#edit-order').prop("onclick", null).off("click");
+	});
+	//alert(order);
+}
+function set_order_value(e, order_value) {
+	e.stopPropagation();
+	if(order_value.endsWith('--')) {
+		val = parseInt($('#order-value').text());
+		if(val > 1) {
+			val = --val;
+		}
+		$('#order-value').text(val);
+	}
+	else if(order_value.endsWith('++')) {
+		val = parseInt($('#order-value').text());
+		if(val < parseInt(order_value)) {
+			val = ++val;
+		}
+		$('#order-value').text(val);
+	}
+	else {
+		$('#order-value').text(order_value);
+	}
+}
+
 function getTileSizeChoices(e, id) {
 	e.stopPropagation();
 	sizes = ['small','medium','large'];

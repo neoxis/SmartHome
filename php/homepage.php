@@ -30,7 +30,7 @@
 				if($row['tile_id'] == '' && $row['tile_onclick'] == '') {
 					$html .= ' empty-tile';
 				}
-				$html .= '" onclick="' . $row['tile_onclick'] . '" oncontextmenu="editMenu(event,' . $row['id'] . ');">';
+				$html .= '" onclick="' . $row['tile_onclick'] . '" oncontextmenu="editMenu(event,' . $row['id'] . ',' . $row['tile_order'] . ');">';
 				$html .= $row['tile_body'];
 				$html .= '</div>';
 			}

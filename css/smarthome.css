@@ -125,6 +125,12 @@ li.dropdown {
 
 #close_modal:hover { background:#CD0000; }
 
+.edit-order-choices p,i {
+	display: inline-block;
+}
+.edit-order-choices i:hover {
+	color: #333333;
+}
 .edit-menu {
 	display: none;
 	position: fixed;
