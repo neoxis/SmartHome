@@ -19,7 +19,9 @@ function openPage(directory, webpageFile) {
 function openPhpMyAdmin() {
 	window.open('/phpmyadmin', '_blank');
 }
-
+function openGitSmartHome() {
+	window.open('https://github.com/neoxis/SmartHome', '_blank');
+}
 function internalTempHandler() {
 	$.getJSON('/php/database_queries/tile_queries.php', {'function': 'getTempWidgetIDs'}, function(e) {
 		getInternalTemp(e.result);

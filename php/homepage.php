@@ -21,8 +21,9 @@
 							<div class="edit-menu"></div>
 							<div class="header" >
 								<h1>SmartHome Dashboard</h1>
-								<i onclick="createTile()" class="fa fa-plus-square-o"></i>
+								<i onclick="createTile()" class="fa fa-plus"></i>
 								<i onclick="openPhpMyAdmin()" class="fa fa-database"></i>
+								<i onclick="openGitSmartHome()" class="fa fa-git"></i>
 							</div>
 							<div class="grid">'; //return false to kill right click default action
 			while($row = $result->fetch_assoc()) {
