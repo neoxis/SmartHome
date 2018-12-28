@@ -182,7 +182,7 @@ li.dropdown {
 .tileL { width: 318px; }
 
 .empty-tile { 
-	opacity: 0.6;
+	opacity: 0.3;
 	filter: alpha(opacity=60);
 	z-index: 0;
 }
