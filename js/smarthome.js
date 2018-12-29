@@ -24,21 +24,39 @@ function openGitSmartHome() {
 }
 function openIconReference(e) {
 	e.stopPropagation();
-	$(".icon-dropdown-content").hide();  
+	$(".settings-dropdown").hide();  
 	$('i.fa.fa-gear.dropdown').toggleClass('white');
 	$(document).off("click");
 	window.open('https://www.w3schools.com/icons/icons_reference.asp', '_blank');
+}
+function openGitReadMe(e, section) {
+	e.stopPropagation();
+	$(".get-dropdown").hide();  
+	$('i.fa.fa-gear.dropdown').toggleClass('white');
+	$(document).off("click");
+	window.open('https://github.com/neoxis/SmartHome/blob/master/README.md' + section, '_blank');
 }
 function toggleSettingsDropdown(e) {
 	e.preventDefault();
 	$(document).on("click",function(e){
 		e.stopPropagation();
-		$(".icon-dropdown-content").hide();  
+		$(".settings-dropdown").hide();  
 		$('i.fa.fa-gear.dropdown').toggleClass('white');
 		$(document).off("click");
   });
 	$('i.fa.fa-gear.dropdown').toggleClass('white');
-	$('.icon-dropdown-content').toggle();
+	$('.settings-dropdown').toggle();
+}
+function toggleGitDropdown(e) {
+	e.preventDefault();
+	$(document).on("click",function(e){
+		e.stopPropagation();
+		$(".git-dropdown").hide();  
+		$('i.fab.fa-git.dropdown').toggleClass('white');
+		$(document).off("click");
+  });
+	$('i.fab.fa-git.dropdown').toggleClass('white');
+	$('.git-dropdown').toggle();
 }
 function internalTempHandler() {
 	$.getJSON('/php/database_queries/tile_queries.php', {'function': 'getTempWidgetIDs'}, function(e) {
@@ -49,23 +67,23 @@ function internalTempHandler() {
 
 function getInternalTemp(tile_ids) {
 	$.getJSON('/php/internal_temp.php', {}, function(e) {
-		celcius_temp = parseFloat(e.internal_temp.slice(5,-3));
+		celcius_temp = parseFloat(e.internal_temp.slice(5,-3)).toFixed(1);
 		fahrenheit_temp = ((celcius_temp * 9 / 5) + 32).toFixed(1);
 		thermometer = '';
 		if(celcius_temp < 15) {
-			thermometer = 'fa fa-thermometer-0';
+			thermometer = 'fas fa-thermometer-empty';
 		}
 		else if(celcius_temp < 30) {
-			thermometer = 'fa fa-thermometer-1';
+			thermometer = 'fas fa-thermometer-quarter';
 		}
 		else if(celcius_temp < 45) {
-			thermometer = 'fa fa-thermometer-2';
+			thermometer = 'fas fa-thermometer-half';
 		}
 		else if(celcius_temp < 60) {
-			thermometer = 'fa fa-thermometer-3';
+			thermometer = 'fas fa-thermometer-three-quarters';
 		}
 		else {
-			thermometer = 'fa fa-thermometer';
+			thermometer = 'fas fa-thermometer-full';
 		}
 		html = "<table style='width:100%;height:100%;'>";
 		html += "<tr><td rowspan='2'><i class='" + thermometer + "' style='font-size:60px;'></td><td align='right'>" + celcius_temp + '&#8451;' + "</td>";
