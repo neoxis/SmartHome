@@ -23,7 +23,7 @@
 								<h1>SmartHome Dashboard</h1>
 								<i onclick="createTile()" class="fa fa-plus fa-fw"></i>
 								<i onclick="openPhpMyAdmin()" class="fa fa-database fa-fw"></i>
-								<i oncontextmenu="toggleGitDropdown(event)" onclick="openGitSmartHome()" class="fab fa-git dropdown">
+								<i oncontextmenu="toggleGitDropdown(event)" onclick="openGitSmartHome()" class="fab fa-git dropdown fa-fw">
 									<div class="icon-dropdown-content git-dropdown">
 										<a onclick="openGitReadMe(event,\'\')"><i class="fab fa-readme fa-fw"></i>&nbsp;&nbsp;Read Me</a>
 										<hr>
