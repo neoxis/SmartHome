@@ -31,8 +31,8 @@ function openIconReference(e) {
 }
 function openGitReadMe(e, section) {
 	e.stopPropagation();
-	$(".get-dropdown").hide();  
-	$('i.fa.fa-gear.dropdown').toggleClass('white');
+	$(".git-dropdown").hide();  
+	$('i.fab.fa-git.dropdown').toggleClass('white');
 	$(document).off("click");
 	window.open('https://github.com/neoxis/SmartHome/blob/master/README.md' + section, '_blank');
 }
