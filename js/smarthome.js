@@ -112,8 +112,14 @@ function editMenu(e, id, order) {
 	html += '</ul>';
 	$('.edit-menu').empty();
 	$('.edit-menu').append(html);
-	$('.edit-menu').css('left', e.pageX);
-	$('.edit-menu').css('top', e.pageY);
+	if(e.pageY > 610) {
+		$('.edit-menu').css('left', e.pageX);
+		$('.edit-menu').css('top', e.pageY -175); //26px per li option	
+	}
+	else {
+		$('.edit-menu').css('left', e.pageX);
+		$('.edit-menu').css('top', e.pageY);
+	}
 	$('.edit-menu').fadeIn(200, closeOutMenu());
 }
 function getTileOrderChoices(e, order, id) {
