@@ -22,6 +22,24 @@ function openPhpMyAdmin() {
 function openGitSmartHome() {
 	window.open('https://github.com/neoxis/SmartHome', '_blank');
 }
+function openIconReference(e) {
+	e.stopPropagation();
+	$(".icon-dropdown-content").hide();  
+	$('i.fa.fa-gear.dropdown').toggleClass('white');
+	$(document).off("click");
+	window.open('https://www.w3schools.com/icons/icons_reference.asp', '_blank');
+}
+function toggleSettingsDropdown(e) {
+	e.preventDefault();
+	$(document).on("click",function(e){
+		e.stopPropagation();
+		$(".icon-dropdown-content").hide();  
+		$('i.fa.fa-gear.dropdown').toggleClass('white');
+		$(document).off("click");
+  });
+	$('i.fa.fa-gear.dropdown').toggleClass('white');
+	$('.icon-dropdown-content').toggle();
+}
 function internalTempHandler() {
 	$.getJSON('/php/database_queries/tile_queries.php', {'function': 'getTempWidgetIDs'}, function(e) {
 		getInternalTemp(e.result);
@@ -69,7 +87,7 @@ function editMenu(e, id, order) {
 	html += '<li onclick="editTile(' + id + ')">Edit</li><hr>';
 	//quick edit
 	html += '<li id="edit-color" onclick="getTileColorChoices(event,' + id + ')">Recolor</li>';
-	html += '<li id="edit-order" onclick="getTileOrderChoices(event,' + order + ')">Reorder</li>';
+	html += '<li id="edit-order" onclick="getTileOrderChoices(event,' + order + ',' + id + ')">Reorder</li>';
 	html += '<li id="edit-size" onclick="getTileSizeChoices(event,' + id + ')">Resize</li>';
 	//delete
 	html += '<hr><li onclick="deleteTile(' + id + ')">Delete</li>';
@@ -80,7 +98,7 @@ function editMenu(e, id, order) {
 	$('.edit-menu').css('top', e.pageY);
 	$('.edit-menu').fadeIn(200, closeOutMenu());
 }
-function getTileOrderChoices(e, order) {
+function getTileOrderChoices(e, order, id) {
 	e.stopPropagation();
 	$.getJSON('/php/database_queries/tile_queries.php', {'function':'getTileCount'}, function(e) {
 		//alert(e.tile_count);
@@ -90,13 +108,22 @@ function getTileOrderChoices(e, order) {
 		html += '<td width="30%" align="center"><p id="order-value">' + order + '</p></td>';
 		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '++\')"class="fa fa-angle-right" style="font-size:24px"></i></td>';
 		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '\')" class="fa fa-angle-double-right" style="font-size:24px"></i></td>';
-		html += '<td align="right"><i class="fa fa-check-square-o" style="font-size:24px"></i></td>';
+		html += '<td align="right"><i onclick="changeTileOrder(' + id + ')" class="fa fa-check-square-o" style="font-size:24px"></i></td>';
 		html += '</tr></table>';
 		$('li#edit-order').html(html);
 		$('li#edit-order').prop("onclick", null).off("click");
 	});
 	//alert(order);
 }
+function changeTileOrder(id) {
+	val = parseInt($('#order-value').text());
+		$.getJSON('/php/database_queries/tile_queries.php', {'function':'changeTileOrder', 'id':id, 'order':val}, function(e) {
+		if(e.result) {
+			location.reload();
+		}
+	});
+}
+
 function set_order_value(e, order_value) {
 	e.stopPropagation();
 	if(order_value.endsWith('--')) {

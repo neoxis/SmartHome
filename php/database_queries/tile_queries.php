@@ -133,6 +133,30 @@
 		}
 	}
 	
+	function changeTileOrder() {
+		$id = $_GET['id'];
+		$tile_order = $_GET['order'];
+		if (init() == true) {
+			global $conn;
+			$sql = "SELECT COUNT(id) AS count FROM tiles";
+			$result = $conn->query($sql);
+			$tile_count = $result->fetch_assoc()['count'];
+			if($tile_order == $tile_count) {
+				$sql = "UPDATE tiles set `tile_order` = `tile_order` - 1 WHERE `tile_order`=" . $tile_order;
+				$result = $conn->query($sql);
+			}
+			else if($tile_order < $tile_count + 1) {
+				$sql = "UPDATE tiles set `tile_order` = `tile_order` + 1 WHERE `tile_order`>=" . $tile_order;
+				$result = $conn->query($sql);
+			}
+			
+			$sql = "UPDATE tiles SET `tile_order` = '" . $tile_order . "' WHERE `id`=" . $id;
+			$result = $conn->query($sql);
+			
+			echo json_encode(array("result" => $result));
+		}
+	}
+	
 	function deleteTile() {
 		$id = $_GET['id'];
 		if (init() == true) {

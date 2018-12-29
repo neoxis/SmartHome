@@ -54,10 +54,20 @@ iframe {
 .navbar li:nth-child(4n+4) a:hover, li:nth-child(4n+4).dropdown:hover .dropbtn {
 	background: #2E8B57;
 }
-.dropdown-content {
+
+.dropdown-content, .icon-dropdown-content {
 	display: none;
 	position: absolute;
 	background-color: black;
+	width:auto;
+	min-width: 160px;
+	z-index: 1;
+}
+.icon-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: black;
+	width:auto;
 	min-width: 160px;
 	z-index: 1;
 }
@@ -74,7 +84,21 @@ li.dropdown {
 	display: block;
 	text-align: left !important;
 }
-
+.icon-dropdown-content i {
+	font-size:24px;
+	color: white;
+}
+.icon-dropdown-content a {
+	color: white;
+	font-size: 18px;
+	white-space: nowrap;
+	text-decoration: none;
+	display: block;
+	text-align: left !important;
+}
+.icon-dropdown-content a:hover {
+	background: #888;
+}
 .modal {
 	display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -222,3 +246,9 @@ li.dropdown {
 .green { background: #2E8B57; }
 
 .grey { background: #888; }
+
+.white { 
+	color: white !important;
+	background: black;
+}
+.black { color: black; }
