@@ -88,8 +88,7 @@ li.dropdown {
 	font-family: Century;
 	font-weight: normal;
 	text-decoration: none;
-	padding-top: 4px;
-	padding: 1px;
+	padding: 4px 10px 4px 1px;
 	display: block;
 	text-align: left !important;
 }

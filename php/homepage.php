@@ -35,6 +35,7 @@
 								<i oncontextmenu="toggleSettingsDropdown(event)" onclick="alert(\'To be implemented\')" class="fa fa-gear dropdown fa-fw">
 									<div class="icon-dropdown-content settings-dropdown">
 										<a onclick="openIconReference(event)"><i class="fab fa-font-awesome-flag fa-fw"></i>&nbsp;&nbsp;Icon Reference</a>
+										<a onclick="openMovieDbApi(event)"><i class="fas fa-film fa-fw"></i>&nbsp;&nbsp;Movie DB API</a>
 									</div>
 								</i>
 							</div>

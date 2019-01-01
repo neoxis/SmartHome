@@ -29,6 +29,13 @@ function openIconReference(e) {
 	$(document).off("click");
 	window.open('https://www.w3schools.com/icons/icons_reference.asp', '_blank');
 }
+function openMovieDbApi(e) {
+	e.stopPropagation();
+	$(".settings-dropdown").hide();  
+	$('i.fa.fa-gear.dropdown').toggleClass('white');
+	$(document).off("click");
+	window.open('https://developers.themoviedb.org/3/getting-started/introduction', '_blank');
+}
 function openGitReadMe(e, section) {
 	e.stopPropagation();
 	$(".git-dropdown").hide();  
@@ -36,6 +43,7 @@ function openGitReadMe(e, section) {
 	$(document).off("click");
 	window.open('https://github.com/neoxis/SmartHome/blob/master/README.md' + section, '_blank');
 }
+
 function toggleSettingsDropdown(e) {
 	e.preventDefault();
 	$(document).on("click",function(e){
