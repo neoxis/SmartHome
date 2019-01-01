@@ -21,9 +21,9 @@
 							<div class="edit-menu"></div>
 							<div class="header">
 								<h1>SmartHome Dashboard</h1>
-								<i onclick="createTile()" class="fa fa-plus fa-fw"></i>
-								<i onclick="openPhpMyAdmin()" class="fa fa-database fa-fw"></i>
-								<i oncontextmenu="toggleGitDropdown(event)" onclick="openGitSmartHome()" class="fab fa-git dropdown fa-fw">
+								<i onclick="createTile()" title="Create Tile" class="fa fa-plus fa-fw"></i>
+								<i onclick="openPhpMyAdmin()" title="Open Database" class="fa fa-database fa-fw"></i>
+								<i oncontextmenu="toggleGitDropdown(event)" title="Open Git Repo" onclick="openGitSmartHome()" class="fab fa-git dropdown fa-fw">
 									<div class="icon-dropdown-content git-dropdown">
 										<a onclick="openGitReadMe(event,\'\')"><i class="fab fa-readme fa-fw"></i>&nbsp;&nbsp;Read Me</a>
 										<hr>
@@ -32,7 +32,7 @@
 										<a onclick="openGitReadMe(event,\'#editing-tiles\')"><i class="fas fa-edit fa-fw"></i>&nbsp;&nbsp;Editing Tiles</a>
 									</div>
 								</i>
-								<i oncontextmenu="toggleSettingsDropdown(event)" onclick="alert(\'To be implemented\')" class="fa fa-gear dropdown fa-fw">
+								<i oncontextmenu="toggleSettingsDropdown(event)" onclick="alert(\'To be implemented\')" title="Settings" class="fa fa-gear dropdown fa-fw">
 									<div class="icon-dropdown-content settings-dropdown">
 										<a onclick="openIconReference(event)"><i class="fab fa-font-awesome-flag fa-fw"></i>&nbsp;&nbsp;Icon Reference</a>
 										<a onclick="openMovieDbApi(event)"><i class="fas fa-film fa-fw"></i>&nbsp;&nbsp;Movie DB API</a>
