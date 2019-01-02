@@ -2,6 +2,7 @@
 <html>
 <head>
  <link href="/css/smarthome.css" rel="stylesheet"></link>
+ <link href="/css/media_library.css" rel="stylesheet"></link>
  <script type="text/javascript" src="/js/media_library.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -11,14 +12,14 @@
  <ul>
   <li><a>Add</a></li>
   <li><a>Delete</a></li>
-  <li><a onclick="searchMovieDatabase('Jack+Reacher')">Search</a></li>
+  <li><a>Search</a></li>
   <li><a>Check-out/Check-in</a></li>
   <li><a>Catalog</a></li>
   <li><a onclick="location.href='/php/homepage.php'">Dashboard</a></li>
  </ul>
 </div>
 <div class="searchbar">
-	<input id="tmdb_search_val"></input>
+	<input id="tmdb_search_val" placeholder="enter title" type="text" oninput="searchMovieDatabase()"></input>
 </div>
 <div class="movie_catalog">
 </div>

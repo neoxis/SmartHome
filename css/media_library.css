@@ -1,0 +1,48 @@
+.overlay {
+  height: 100%;
+  width: 100%;
+  opacity: 0.1;
+  transition: .3s ease;
+  background-color: black;
+}
+
+.movie_container, .movie_container img {
+	height: 375px;
+	width: 250px;
+	display: inline-block;
+}
+
+.movie_info {
+	display: none;
+	position: absolute;
+	height: 375px;
+	width: 250px;
+	z-index: 1;
+}
+
+.fade_image {
+	opacity: 0.1;
+}
+
+.movie_catalog {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.searchbar  input{
+	width: 100%;
+	color: white;
+	background: black;
+	border: none;
+	border-bottom: 2px solid white;
+	padding: 10px 0px;
+}
+.searchbar input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+.searchbar input:-webkit-autofill,
+.searchbar input:-webkit-autofill:hover, 
+.searchbar input:-webkit-autofill:focus, 
+.searchbar input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px black inset;
+}
