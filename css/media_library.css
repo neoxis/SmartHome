@@ -1,15 +1,8 @@
-.overlay {
-  height: 100%;
-  width: 100%;
-  opacity: 0.1;
-  transition: .3s ease;
-  background-color: black;
-}
-
 .movie_container, .movie_container img {
 	height: 375px;
 	width: 250px;
 	display: inline-block;
+	background: black;
 }
 
 .movie_info {
@@ -21,7 +14,7 @@
 }
 
 .fade_image {
-	opacity: 0.1;
+	opacity: 0.2;
 }
 
 .movie_catalog {
