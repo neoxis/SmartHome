@@ -22,6 +22,9 @@
 	margin: 0 auto;
 }
 
+.searchbar {
+	display: none;
+}
 .searchbar  input{
 	width: 100%;
 	color: white;

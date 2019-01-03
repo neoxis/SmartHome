@@ -44,3 +44,9 @@ function searchMovieDatabase() {
 		});
 	});
 }
+
+function displaySearchBar() {
+	$('#tmdb_search_val').val("");
+	$('.searchbar').toggle();
+	$('.movie_catalog').empty();
+}
