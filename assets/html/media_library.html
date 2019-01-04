@@ -5,17 +5,18 @@
  <link href="/css/media_library.css" rel="stylesheet"></link>
  <script type="text/javascript" src="/js/media_library.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
-<h1>Media Library</h1>
+<div class="header">
+ <h1>Media Library</h1>
+ <i onclick="location.href='/php/homepage.php'" title="Dashboard" class='fas fa-home fa-fw'></i>
+</div>
 <div class="navbar">
  <ul>
-  <li><a>Add</a></li>
-  <li><a>Delete</a></li>
-  <li><a onclick="displaySearchBar()">Search</a></li>
+  <li><a onclick="displaySearchBar(this)">Search</a></li>
   <li><a>Check-out/Check-in</a></li>
   <li><a>Catalog</a></li>
-  <li><a onclick="location.href='/php/homepage.php'">Dashboard</a></li>
  </ul>
 </div>
 <div class="searchbar">

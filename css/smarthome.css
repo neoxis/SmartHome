@@ -173,16 +173,16 @@ li.dropdown {
 	font-size: 17px;
 	color: white;
 }
-.menu-options li:nth-child(4n+1):hover {
+.menu-options li:nth-child(4n+1):hover, .menu-options li:nth-child(4n+1).active {
 	background:#DAA520;
 }
-.menu-options li:nth-child(4n+2):hover {
+.menu-options li:nth-child(4n+2):hover, .menu-options li:nth-child(4n+2).active {
 	background:#CD0000;
 }
-.menu-options li:nth-child(4n+3):hover {
+.menu-options li:nth-child(4n+3):hover, .menu-options li:nth-child(4n+3).active {
 	background:#4682B4;
 }
-.menu-options li:nth-child(4n+4):hover {
+.menu-options li:nth-child(4n+4):hover, .menu-options li:nth-child(4n+4).active {
 	background: #2E8B57;
 }
 

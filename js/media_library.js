@@ -16,7 +16,18 @@ function searchMovieDatabase() {
 					movie = data.results[i];
 					if(movie.poster_path) {
 						html += '<div class="movie_container">';
-						html += '<div class="movie_info">' + movie.overview + '</div>';
+						if(movie.backdrop_path) {
+							html += '<input type="hidden" name="backdrop-image" value="' + movie.backdrop_path + '">';
+						}
+						else {
+							html += '<input type="hidden" id="backdrop-image" value="">';
+						}
+						html += '<div class="movie_info">';
+						html += movie.overview;
+						html += '<div class="movie_options">';
+						html += '<button>Add To Catalog</button>';
+						html += '</div>';
+						html += '</div>';
 						html += '<img src="https://image.tmdb.org/t/p/w500' + movie.poster_path + '"></img>';
 						//html += '<p align="center">' + movie.title + '</p>';
 						html += '</div>';
@@ -26,14 +37,16 @@ function searchMovieDatabase() {
 				$('.movie_catalog').html(html);
 				$('.movie_container').hover(
 					function () {
-						//$(this).addClass('overlay');
 						$(this).find('img').addClass('fade_image');
 						$(this).find('.movie_info').show();
+						if($(this).find('input[name=backdrop-image]').val() != "") {
+							$('body').css('background-image', 'url(https://image.tmdb.org/t/p/w500' + $(this).find('input[name=backdrop-image]').val() + ')');
+						}
 					},
 					function () {
-						//$(this).removeClass('overlay');
 						$(this).find('img').removeClass('fade_image');
 						$(this).find('.movie_info').hide();
+						$('body').css('background-image', '');
 					}
 					);
 				console.log(data);
@@ -45,7 +58,10 @@ function searchMovieDatabase() {
 	});
 }
 
-function displaySearchBar() {
+function displaySearchBar(obj) {
+	//need to find a better way to toggle hover color
+	$(obj).toggleClass('yellow');
+	
 	$('#tmdb_search_val').val("");
 	$('.searchbar').toggle();
 	$('.movie_catalog').empty();
