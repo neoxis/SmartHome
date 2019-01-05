@@ -12,7 +12,7 @@ function searchMovieDatabase() {
 			success: function(data) {
 				//display here
 				html = '';
-				for(var i = 0; i < data.results.length; i++) {
+				for(i = 0; i < data.results.length; i++) {
 					movie = data.results[i];
 					if(movie.poster_path) {
 						html += '<div class="movie_container">';
@@ -20,11 +20,16 @@ function searchMovieDatabase() {
 							html += '<input type="hidden" name="backdrop-image" value="' + movie.backdrop_path + '">';
 						}
 						else {
-							html += '<input type="hidden" id="backdrop-image" value="">';
+							html += '<input type="hidden" name="backdrop-image" value="">';
 						}
 						html += '<div class="movie_info">';
-						html += movie.overview;
+						html += movie.title;
+						html += movie.release_date.split('-')[0];
+						for(j = 0; j < movie.genre_ids.length; j++) {
+							html += getGenreFromId(movie.genre_ids[j]);
+						}
 						html += '<div class="movie_options">';
+						html += '<button>View Details</button>';
 						html += '<button>Add To Catalog</button>';
 						html += '</div>';
 						html += '</div>';
@@ -56,6 +61,29 @@ function searchMovieDatabase() {
 			}
 		});
 	});
+}
+
+function getGenreFromId(genre_id) {
+	if     (genre_id == 12)    { return 'Adventure'; }
+	else if(genre_id == 14)    { return 'Fantasy'; }
+	else if(genre_id == 16)    { return 'Animation'; }
+	else if(genre_id == 18)    { return 'Drama'; }
+	else if(genre_id == 27)    { return 'Horror'; }
+	else if(genre_id == 28)    { return 'Action'; }
+	else if(genre_id == 35)    { return 'Comedy'; }
+	else if(genre_id == 36)    { return 'History'; }
+	else if(genre_id == 37)    { return 'Western'; }
+	else if(genre_id == 53)    { return 'Thiller'; }
+	else if(genre_id == 80)    { return 'Crime'; }
+	else if(genre_id == 99)    { return 'Documentary'; }
+	else if(genre_id == 878)   { return 'Science Fiction'; }
+	else if(genre_id == 9648)  { return 'Mystery'; }
+	else if(genre_id == 10402) { return 'Music'; }
+	else if(genre_id == 10749) { return 'Romance'; }
+	else if(genre_id == 10751) { return 'Family'; }
+	else if(genre_id == 10752) { return 'War'; }
+	else if(genre_id == 10770) { return 'TV Movie'; }
+	else { console.log(genre_id); }
 }
 
 function displaySearchBar(obj) {

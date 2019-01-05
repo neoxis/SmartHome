@@ -12,7 +12,14 @@
 	width: 250px;
 	z-index: 1;
 }
-
+.movie_options {
+	position: absolute;
+	width: 100%;
+	bottom: 5px;
+}
+.movie_options button{
+	width: 50%;
+}
 .fade_image {
 	opacity: 0.2;
 }
