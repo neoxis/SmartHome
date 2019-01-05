@@ -1,4 +1,7 @@
 function searchMovieDatabase() {
+	if ($('#tmdb_search_val').val() == '') {
+		return;
+	}
 	$.getJSON('/php/database_queries/settings_queries.php', { 'function':'getTMDBapiKey' }, function(e) {
 		$.ajax({
 			url: 'https://api.themoviedb.org/3/search/movie',
