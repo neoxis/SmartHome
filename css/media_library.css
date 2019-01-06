@@ -18,7 +18,12 @@
 	bottom: 5px;
 }
 .movie_options button{
+	background-color: #333333;
+	color: white;
+	padding: 5px;
+	border: 1px solid #888;
 	width: 50%;
+	font-size: 14px;
 }
 .fade_image {
 	opacity: 0.2;

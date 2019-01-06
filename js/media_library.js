@@ -22,17 +22,22 @@ function searchMovieDatabase() {
 						if(movie.backdrop_path) {
 							html += '<input type="hidden" name="backdrop-image" value="' + movie.backdrop_path + '">';
 						}
-						else {
-							html += '<input type="hidden" name="backdrop-image" value="">';
-						}
+						else { html += '<input type="hidden" name="backdrop-image" value="">'; }
+						
 						html += '<div class="movie_info">';
-						html += movie.title;
+						if(movie.title) { html += movie.title; }
+						else if(movie.name) { html += movie.name; }
+						else { html += 'error'; }
+						
 						if(movie.release_date) {
 							html += movie.release_date.split('-')[0];
 						}
-						for(j = 0; j < movie.genre_ids.length; j++) {
-							html += getGenreFromId(movie.genre_ids[j]);
+						if(movie.genre_ids) {
+							for(j = 0; j < movie.genre_ids.length; j++) {
+								html += getGenreFromId(movie.genre_ids[j]);
+							}
 						}
+
 						html += '<div class="movie_options">';
 						html += '<button>View Details</button>';
 						html += '<button>Add To Catalog</button>';
@@ -105,5 +110,6 @@ function displaySearchBar(obj) {
 	
 	$('#tmdb_search_val').val("");
 	$('.searchbar').toggle();
+	$('#tmdb_search_val').focus();
 	$('.movie_catalog').empty();
 }
