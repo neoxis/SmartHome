@@ -135,12 +135,12 @@ function getTileOrderChoices(e, order, id) {
 	$.getJSON('/php/database_queries/tile_queries.php', {'function':'getTileCount'}, function(e) {
 		//alert(e.tile_count);
 		html =  '<table class="edit-order-choices"><tr width="100%">';
-		html += '<td><i onclick="set_order_value(event,\'1\')" class="fa fa-angle-double-left" style="font-size:24px"></i></td>';
-		html += '<td><i onclick="set_order_value(event,\'--\')" class="fa fa-angle-left" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'1\')" class="fas fa-angle-double-left" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'--\')" class="fas fa-angle-left" style="font-size:24px"></i></td>';
 		html += '<td width="30%" align="center"><p id="order-value">' + order + '</p></td>';
-		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '++\')"class="fa fa-angle-right" style="font-size:24px"></i></td>';
-		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '\')" class="fa fa-angle-double-right" style="font-size:24px"></i></td>';
-		html += '<td align="right"><i onclick="changeTileOrder(' + id + ')" class="fa fa-check-square-o" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '++\')"class="fas fa-angle-right" style="font-size:24px"></i></td>';
+		html += '<td><i onclick="set_order_value(event,\'' + e.tile_count + '\')" class="fas fa-angle-double-right" style="font-size:24px"></i></td>';
+		html += '<td align="right"><i onclick="changeTileOrder(' + id + ')" class="far fa-check-square" style="font-size:24px"></i></td>';
 		html += '</tr></table>';
 		$('li#edit-order').html(html);
 		$('li#edit-order').prop("onclick", null).off("click");
