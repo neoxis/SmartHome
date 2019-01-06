@@ -4,7 +4,7 @@ function searchMovieDatabase() {
 	}
 	$.getJSON('/php/database_queries/settings_queries.php', { 'function':'getTMDBapiKey' }, function(e) {
 		$.ajax({
-			url: 'https://api.themoviedb.org/3/search/movie',
+			url: 'https://api.themoviedb.org/3/search/multi',
 			crossDomain: true,
 			dataType: 'jsonp',
 			data: {
@@ -27,7 +27,9 @@ function searchMovieDatabase() {
 						}
 						html += '<div class="movie_info">';
 						html += movie.title;
-						html += movie.release_date.split('-')[0];
+						if(movie.release_date) {
+							html += movie.release_date.split('-')[0];
+						}
 						for(j = 0; j < movie.genre_ids.length; j++) {
 							html += getGenreFromId(movie.genre_ids[j]);
 						}
@@ -85,6 +87,14 @@ function getGenreFromId(genre_id) {
 	else if(genre_id == 10749) { return 'Romance'; }
 	else if(genre_id == 10751) { return 'Family'; }
 	else if(genre_id == 10752) { return 'War'; }
+	else if(genre_id == 10759) { return 'Action & Adventure'; }
+	else if(genre_id == 10762) { return 'Kids'; }
+	else if(genre_id == 10763) { return 'News'; }
+	else if(genre_id == 10764) { return 'Reality'; }
+	else if(genre_id == 10765) { return 'Sci-Fi & Fantasy'; }
+	else if(genre_id == 10766) { return 'Soap'; }
+	else if(genre_id == 10767) { return 'Talk'; }
+	else if(genre_id == 10768) { return 'War & Politics'; }
 	else if(genre_id == 10770) { return 'TV Movie'; }
 	else { console.log(genre_id); }
 }
