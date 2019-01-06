@@ -3,104 +3,100 @@ function searchMovieDatabase() {
 		$('.movie_catalog').empty();
 		return;
 	}
-	try {
-		$.getJSON('/php/database_queries/settings_queries.php', { 'function':'getTMDBapiKey' }, function(e) {
-			$.ajax({
-				url: 'https://api.themoviedb.org/3/search/multi',
-				crossDomain: true,
-				dataType: 'jsonp',
-				data: {
-					api_key: e.api_key,
-					query: $('#tmdb_search_val').val()
-				},
-				method: 'GET',
-				success: function(data) {
-					//display here
-					html = '';
-					for(i = 0; i < data.results.length; i++) {
-						movie = data.results[i];
-						if(movie.poster_path) {
-							html += '<div class="movie_container">';
-							if(movie.backdrop_path) {
-								html += '<input type="hidden" name="backdrop-image" value="' + movie.backdrop_path + '">';
-							}
-							else { html += '<input type="hidden" name="backdrop-image" value="">'; }
-							
-							html += '<div class="movie_info">';
-							if(movie.title) { html += '<h3>' + movie.title + '</h3>'; }
-							else if(movie.name) { html += '<h3>' + movie.name + '</h3>'; }
-							else { html += '-----'; }
-							
-							html += '<table>';
-							
-							if(movie.release_date) { 
-								html += '<tr><td>Release Date</td><td>';
-								temp_rd = movie.release_date.split('-');
-								html += temp_rd[1] + '-' + temp_rd[2] + '-' + temp_rd[0];
-								html += '</td></tr><tr>';
-							}
-							else if(movie.first_air_date) {
-								html += '<tr><td>First Air Date</td><td>';
-								temp_fad = movie.first_air_date.split('-');
-								html += temp_fad[1] + '-' + temp_fad[2] + '-' + temp_fad[0];
-								html += '</td></tr><tr>';
-							}
-							else {
-								html += '<tr><td>-----</td><td>-----</td></tr>';
-							}
-							
-							if(movie.genre_ids) {
-								html += '<tr><td>Genre</td><td>';
-								for(j = 0; j < movie.genre_ids.length; j++) {
-									html += getGenreFromId(movie.genre_ids[j]);
-									if(j < movie.genre_ids.length - 1) {
-										html += '<br>';
-									}
-								}
-								html += '</td></tr>';
-							}
-							
-							html += '</table>';
-							html += '<div class="movie_options">';
-							html += '<button>View Details</button>';
-							html += '<button>Add To Catalog</button>';
-							html += '</div>';
-							html += '</div>';
-							html += '<img src="https://image.tmdb.org/t/p/w500' + movie.poster_path + '"></img>';
-							//html += '<p align="center">' + movie.title + '</p>';
-							html += '</div>';
-						}
-					}
-					$('.movie_catalog').empty();
-					$('.movie_catalog').html(html);
-					$('.movie_container').hover(
-						function () {
-							$(this).find('img').addClass('fade_image');
-							$(this).find('.movie_info').show();
-							if($(this).find('input[name=backdrop-image]').val() != "") {
-								$('body').css('background-image', 'url(https://image.tmdb.org/t/p/w500' + $(this).find('input[name=backdrop-image]').val() + ')');
-							}
-						},
-						function () {
-							$(this).find('img').removeClass('fade_image');
-							$(this).find('.movie_info').hide();
-							$('body').css('background-image', '');
-						}
-						);
-					console.log(data);
-				},
-				error: function(e) {
-					console.log(e);
-				}
-			});
+	$.getJSON('/php/database_queries/settings_queries.php', { 'function':'getTMDBapiKey' }, function(e) {
+		$.ajax({
+			url: 'https://api.themoviedb.org/3/search/multi',
+			crossDomain: true,
+			dataType: 'jsonp',
+			data: {
+				api_key: e.api_key,
+				query: $('#tmdb_search_val').val()
+			},
+			method: 'GET',
+			success: function(data) {
+				createResultsHTML(data);
+			},
+			error: function(e) {
+				console.log('entered');
+			}
 		});
-	}
-	catch(err) {
-		console.log(err);
-		$('.movie_catalog').empty();
-	}
+	});
 }
 
+function createResultsHTML(data) {
+	html = '';
+	for(i = 0; i < data.results.length; i++) {
+		movie = data.results[i];
+		if(movie.poster_path) {
+			html += '<div class="movie_container">';
+			if(movie.backdrop_path) {
+				html += '<input type="hidden" name="backdrop-image" value="' + movie.backdrop_path + '">';
+			}
+			else { html += '<input type="hidden" name="backdrop-image" value="">'; }
+			
+			html += '<div class="movie_info">';
+			if(movie.title) { html += '<h3>' + movie.title + '</h3>'; }
+			else if(movie.name) { html += '<h3>' + movie.name + '</h3>'; }
+			else { html += '-----'; }
+			
+			html += '<table>';
+			
+			if(movie.release_date) { 
+				html += '<tr><td>Release Date</td><td>';
+				temp_rd = movie.release_date.split('-');
+				html += temp_rd[1] + '-' + temp_rd[2] + '-' + temp_rd[0];
+				html += '</td></tr><tr>';
+			}
+			else if(movie.first_air_date) {
+				html += '<tr><td>First Air Date</td><td>';
+				temp_fad = movie.first_air_date.split('-');
+				html += temp_fad[1] + '-' + temp_fad[2] + '-' + temp_fad[0];
+				html += '</td></tr><tr>';
+			}
+			else {
+				html += '<tr><td>-----</td><td>-----</td></tr>';
+			}
+			
+			if(movie.genre_ids) {
+				html += '<tr><td>Genre</td><td>';
+				for(j = 0; j < movie.genre_ids.length; j++) {
+					html += getGenreFromId(movie.genre_ids[j]);
+					if(j < movie.genre_ids.length - 1) {
+						html += '<br>';
+					}
+				}
+				html += '</td></tr>';
+			}
+			
+			html += '</table>';
+			html += '<div class="movie_options">';
+			html += '<button>View Details</button>';
+			html += '<button>Add To Catalog</button>';
+			html += '</div>';
+			html += '</div>';
+			html += '<img src="https://image.tmdb.org/t/p/w500' + movie.poster_path + '"></img>';
+			//html += '<p align="center">' + movie.title + '</p>';
+			html += '</div>';
+		}
+	}
+	$('.movie_catalog').empty();
+	$('.movie_catalog').html(html);
+	$('.movie_container').hover(
+		function () {
+			$(this).find('img').addClass('fade_image');
+			$(this).find('.movie_info').show();
+			if($(this).find('input[name=backdrop-image]').val() != "") {
+				$('body').css('background-image', 'url(https://image.tmdb.org/t/p/w500' + $(this).find('input[name=backdrop-image]').val() + ')');
+			}
+		},
+		function () {
+			$(this).find('img').removeClass('fade_image');
+			$(this).find('.movie_info').hide();
+			$('body').css('background-image', '');
+		}
+		);
+	console.log(data);
+}
 function getGenreFromId(genre_id) {
 	switch(genre_id) {
 		case 12:    return 'Adventure';
