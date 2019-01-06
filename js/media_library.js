@@ -25,8 +25,8 @@ function searchMovieDatabase() {
 						else { html += '<input type="hidden" name="backdrop-image" value="">'; }
 						
 						html += '<div class="movie_info">';
-						if(movie.title) { html += movie.title; }
-						else if(movie.name) { html += movie.name; }
+						if(movie.title) { html += '<h3>' + movie.title + '</h3>'; }
+						else if(movie.name) { html += '<h3>' + movie.name + '</h3>'; }
 						else { html += '-----'; }
 						
 						html += '<table>';

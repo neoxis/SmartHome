@@ -15,6 +15,9 @@
 .movie_info table {
 	width: 100%;
 }
+.movie_info td {
+	border-bottom: 1pt solid white;
+}
 .movie_options {
 	position: absolute;
 	width: 100%;
