@@ -12,6 +12,9 @@
 	width: 250px;
 	z-index: 1;
 }
+.movie_info table {
+	width: 100%;
+}
 .movie_options {
 	position: absolute;
 	width: 100%;

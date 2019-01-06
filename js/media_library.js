@@ -27,17 +27,38 @@ function searchMovieDatabase() {
 						html += '<div class="movie_info">';
 						if(movie.title) { html += movie.title; }
 						else if(movie.name) { html += movie.name; }
-						else { html += 'error'; }
+						else { html += '-----'; }
 						
-						if(movie.release_date) {
-							html += movie.release_date.split('-')[0];
+						html += '<table>';
+						
+						if(movie.release_date) { 
+							html += '<tr><td>Release Date</td><td>';
+							temp_rd = movie.release_date.split('-');
+							html += temp_rd[1] + '-' + temp_rd[2] + '-' + temp_rd[0];
+							html += '</td></tr><tr>';
 						}
+						else if(movie.first_air_date) {
+							html += '<tr><td>First Air Date</td><td>';
+							temp_fad = movie.first_air_date.split('-');
+							html += temp_fad[1] + '-' + temp_fad[2] + '-' + temp_fad[0];
+							html += '</td></tr><tr>';
+						}
+						else {
+							html += '<tr><td>-----</td><td>-----</td></tr>';
+						}
+						
 						if(movie.genre_ids) {
+							html += '<tr><td>Genre</td><td>';
 							for(j = 0; j < movie.genre_ids.length; j++) {
 								html += getGenreFromId(movie.genre_ids[j]);
+								if(j < movie.genre_ids.length - 1) {
+									html += '<br>';
+								}
 							}
+							html += '</td></tr>';
 						}
-
+						
+						html += '</table>';
 						html += '<div class="movie_options">';
 						html += '<button>View Details</button>';
 						html += '<button>Add To Catalog</button>';
